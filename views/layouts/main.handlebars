@@ -12,11 +12,17 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 {{!-- Body --}}
+
+ 
+
+
+
 <body>
     <div class="container">  {{!-- container start --}}
     <nav>
     <div class="nav-wrapper indigo">
       <a href="/" class="brand-logo tooltipped" id="logo" data-position="bottom" data-tooltip="Take me home"> <i class="material-icons">phone</i>Telefónny zoznam</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 
         {{!-- search --}}
@@ -39,8 +45,11 @@
         <li><a href="/" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Take me home">Domov</a></li>
         <li><a href="/add" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Pridaj číslo"><i class="medium material-icons"> add </i></a></li>  
         <li><a class="waves-effect tooltipped waves-light btn modal-trigger" href="#modal1" data-position="bottom" data-tooltip="Vymaž všetky záznamy"><i class="medium material-icons"> delete </i></a></li>
+         
         
-        {{!-- Modal stuff --}}
+        
+
+        {{!-- Modal /delete all confirm\ stuff --}}
         <div id="modal1" class="modal">
         <div class="modal-content black-text">
             <h4>Táto akcia vymaže všetky čísla</h4>
@@ -56,6 +65,13 @@
       </ul>
     </div>
   </nav>
+  {{!-- Sidenav Mobile navbar --}}
+         <ul class="sidenav" id="mobile-demo">
+    <li> <a href="/" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Domov"><i class="medium material-icons"> home </i></a></li>
+    <li><a href="/add" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Pridaj číslo"><i class="medium material-icons"> add </i></a></li>
+    <li><a class="waves-effect tooltipped waves-light btn modal-trigger" href="/deleteall" data-position="bottom" data-tooltip="Vymaž všetky záznamy"><i class="medium material-icons"> delete </i></a></li>
+    </ul> 
+
  <div style="height:30px"></div>  
 
 
@@ -97,6 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.tooltipped');
     var instances = M.Tooltip.init(elems);
   });
+  {{!-- Sidenav mobile --}}
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });
+
 </script>
 
 
