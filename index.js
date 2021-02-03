@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port')), function() {
     console.log('Server started at port: '+app.get('port'));
+    loadFromJSON();
 }
 
 
@@ -48,9 +49,10 @@ function saveToJSON() {
     fs.writeFile(path.join(__dirname, 'JSON', 'zoznam.json'), zoznamJSON, function(err)  {
         if (err) {console.log(err);
         }
+        console.log(zoznamJSON);
+        console.log('JSON sucessfully saved');
 })};
 
-saveToJSON();
 
 
 //Load from JSON function
@@ -58,24 +60,31 @@ function loadFromJSON() {
    fs.readFile(path.join(__dirname, 'JSON', 'zoznam.json'), 'utf8', function(err,data){
         if (err) {console.log(err)};
         zoznam = JSON.parse(data);
-        console.log(data);
+        console.log('JSON loaded succesfuly');
 
     })
 }
 loadFromJSON();
+
+
 // Routes - home
 app.get('/', (req, res) => {
     res.render('index', {zoznam: zoznam});
 });
+
+
 // Add number
 app.get('/add', (req, res) => {
     res.render('add', {zoznam: zoznam})
 });
+
+
 //Add number POST
 app.post('/add', urlencodedParser, (req, res) => {
     var nove = {name: req.body.name, phone: req.body.number, id: uuidv4()};
     zoznam.push(nove);
     res.render('add-success', {data: req.body, zoznam:zoznam});
+    saveToJSON();
     
   })
 
@@ -84,7 +93,7 @@ app.get('/delete/:id',  (req, res) => {
     const toBeDeleted = zoznam.filter(member => member.id == req.params.id);
     zoznam = zoznam.filter(member => member.id !== req.params.id);
     res.render('delete', {name: toBeDeleted[0].name, phone:toBeDeleted[0].phone, zoznam: zoznam});
-    
+    saveToJSON();
    
 });
 
@@ -92,7 +101,8 @@ app.get('/delete/:id',  (req, res) => {
 app.get('/deleteall',  (req, res) => {
     zoznam = [];
     res.render('index', {zoznam: zoznam});
-    
+    saveToJSON();
+
    
 });
 
@@ -114,14 +124,18 @@ app.post('/edit/:id', urlencodedParser, (req, res) => {
         }
     });
     res.render('edit-success', {zoznam:zoznam, editDATA: editDATA});
+    saveToJSON();
+
 });
 
-//JSON
-// app.get('/JSON/autocomplete.json', (req,res) => {
-//     res.send(zoznam);
-// })
-var toggle = true;
+//GET JSON FILE
+app.get('/JSON/zoznam.json', (req,res) => {
+    res.json(zoznam);
+});
+
+
 //Alphabetical sorting
+var toggle = true;
 app.get('/sort', (req,res) => {
     if (toggle == true){
       toggle = false;

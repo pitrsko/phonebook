@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhoneBook App</title>
     <link type="text/css" rel="stylesheet" href="../style.css">
+
     <!--Materialize stuff-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
+{{!-- Body --}}
 <body>
     <div class="container">  {{!-- container start --}}
     <nav>
     <div class="nav-wrapper indigo">
-      <a href="/" class="brand-logo" id="logo"> <i class="material-icons">phone</i>Telefónny zoznam</a>
+      <a href="/" class="brand-logo tooltipped" id="logo" data-position="bottom" data-tooltip="Take me home"> <i class="material-icons">phone</i>Telefónny zoznam</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+
         {{!-- search --}}
         <li>    
             <div class="center row">
@@ -33,9 +36,10 @@
         {{!-- end ofsearch --}}
         
         {{!-- navigation links --}}
-        <li><a href="/" class="btn waves-effect waves">Domov</a></li>
-        <li><a href="/add" class="btn waves-effect waves"><i class="medium material-icons"> add </i></a></li>  
-        <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1" style><i class="medium material-icons"> delete </i></a></li>
+        <li><a href="/" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Take me home">Domov</a></li>
+        <li><a href="/add" class="btn tooltipped waves-effect waves" data-position="bottom" data-tooltip="Pridaj číslo"><i class="medium material-icons"> add </i></a></li>  
+        <li><a class="waves-effect tooltipped waves-light btn modal-trigger" href="#modal1" data-position="bottom" data-tooltip="Vymaž všetky záznamy"><i class="medium material-icons"> delete </i></a></li>
+        
         {{!-- Modal stuff --}}
         <div id="modal1" class="modal">
         <div class="modal-content black-text">
@@ -52,13 +56,19 @@
       </ul>
     </div>
   </nav>
-  
+ <div style="height:30px"></div>  
+
 
 {{!-- Delete phonebook --}}
 
 
     {{{body}}}
-  
+    
+{{!-- JSON download --}}
+<div style="height:30px"></div>  
+  <a href="/JSON/zoznam.json" class="waves-effect tooltipped waves-light btn  yellow black-text modal-trigger" data-position="bottom" data-tooltip="Zobraz JSON súbor">JSON file download</a>
+
+{{!-- Footer --}}
   <div style="height:500px"></div> <!-- div na vysku -->
   <footer class="page-footer blue lighten-2"> 
       <div class="footer-copyright">
@@ -81,6 +91,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.getElementById('modal1');
     var instances = M.Modal.init(elems);
+  });
+{{!-- Tooltips stuff --}}
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
   });
 </script>
 
