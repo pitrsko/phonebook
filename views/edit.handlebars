@@ -1,0 +1,27 @@
+  <h3>Upravte telefónne číslo </h3>
+  
+  
+ <div class="row">
+    <form class="col s12"  action="/edit/{{edituj.[0].id}}" method="POST">
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="nameInput" type="text" name="name" value= "{{edituj.[0].name}}" required oninvalid="this.setCustomValidity('Zadajte meno prosím')"
+             onvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" >
+          <label for="nameInput">Meno</label>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="phoneInput" type="number" class="validate" name="phone" value="{{edituj.[0].phone}}" required oninvalid="this.setCustomValidity('Zadajte meno prosím')"
+             onvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')">
+          <label for="phoneInput">Telefónne číslo</label>
+          <span class="helper-text" data-error="Povolené sú iba čísla" data-success="OK">Povolené iba číselné hodnoty</span>
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="btn waves-effect waves white-text">
+    </form>
+  </div>
+
+ 

@@ -1,0 +1,25 @@
+ <h3>Pridajte telefónne číslo</h3>
+ <div class="row">
+    <form class="col s12"  action="/add" method="POST">
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="nameInput" type="text" name="name" required oninvalid="this.setCustomValidity('Zadajte meno prosím')"
+             onvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" />
+          <label for="nameInput">Meno</label>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="phoneInput" type="number" class="validate" name="number" required oninvalid="this.setCustomValidity('Zadajte číslo prosím')"
+             onvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" >
+          <label for="phoneInput">Telefónne číslo</label>
+          <span class="helper-text" data-error="Povolené sú iba čísla" data-success="OK">Povolené iba číselné hodnoty</span>
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="btn waves-effect waves white-text">
+    </form>
+  </div>
+
+   
