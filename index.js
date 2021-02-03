@@ -156,7 +156,6 @@ app.get('/sort', (req,res) => {
 });
 
 //Search
-// var bedrooms = zoznam.filter(name => name.includes('bedroom'));
 
 
 //Autocomplete
